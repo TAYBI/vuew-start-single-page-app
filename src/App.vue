@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import { onMounted } from 'vue';
+// import { onMounted } from 'vue';
 import navBar from './components/NavBar.vue';
 import pageViewer from './components/pageViewer.vue';
 
