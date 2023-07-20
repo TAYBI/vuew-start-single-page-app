@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import { onMounted } from 'vue';
 import navBar from './components/NavBar.vue';
 import pageViewer from './components/pageViewer.vue';
 
@@ -32,6 +33,21 @@ export default {
                     content: 'this is the Content content'
                 },
             ]
+        }
+    },
+    mounted() {
+        // this.getClients();
+        console.log();
+    },
+    methods: {
+        async getClients() {
+            try {
+                const response = await fetch("");
+                const clients = await response.json();
+                console.log(clients);
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 }
