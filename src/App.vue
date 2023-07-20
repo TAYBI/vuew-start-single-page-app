@@ -1,19 +1,23 @@
 <template>
     <nav-bar :pages="pages" :active-page="activePage" :nav-link-click="(index) => activePage = index"></nav-bar>
-    <page-viewer v-if="clients.length > 0" :clients="clients"></page-viewer>
+    <!-- <page-viewer v-if="clients.length > 0" :clients="clients"></page-viewer> -->
+    <create-page :page-created="pageCreated">
+
+    </create-page>
 </template>
 
 <script>
 // import { onMounted } from 'vue';
+import createPage from './components/CreatePage.vue';
 import navBar from './components/NavBar.vue';
 import pageViewer from './components/pageViewer.vue';
-
 
 
 export default {
     components: {
         pageViewer,
-        navBar
+        navBar,
+        createPage,
     },
     data() {
         return {
@@ -39,7 +43,7 @@ export default {
         }
     },
     created() {
-        this.getClients();
+        // this.getClients();
         console.log();
     },
     methods: {
@@ -51,6 +55,9 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+        },
+        pageCreated(pageObj) {
+            console.log(pageObj);
         }
     }
 }
