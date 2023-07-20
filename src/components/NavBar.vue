@@ -19,6 +19,8 @@ export default {
     props: ['pages', 'activePage', 'navLinkClick'],
     computed: {
         navBarClasses() {
+            this.setThemeSetting();
+
             return {
                 'navbar-dark bg-dark': this.useDarkMode,
                 'navbar-light bg-light': !this.useDarkMode
@@ -26,9 +28,28 @@ export default {
         }
     },
 
+
+    created() {
+        this.getThemeSetting();
+    },
+
     data() {
         return {
             useDarkMode: true,
+        }
+    }
+
+    ,
+    methods: {
+        setThemeSetting() {
+            localStorage.setItem('useDarkMode', this.useDarkMode);
+        },
+        getThemeSetting() {
+            let useDarkMode = localStorage.getItem('useDarkMode');
+
+            if (useDarkMode) {
+                this.useDarkMode = !useDarkMode;
+            }
         }
     }
 }

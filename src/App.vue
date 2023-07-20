@@ -1,6 +1,6 @@
 <template>
     <nav-bar :pages="pages" :active-page="activePage" :nav-link-click="(index) => activePage = index"></nav-bar>
-    <page-viewer :clients="clients"></page-viewer>
+    <page-viewer v-if="clients.length > 0" :clients="clients"></page-viewer>
 </template>
 
 <script>
@@ -47,7 +47,7 @@ export default {
             try {
                 const response = await fetch("http://178.238.238.52:8083/api/clients/omag_71_Dev commercial");
                 this.clients = await response.json();
-                console.log(clients);
+                console.log(this.clients);
             } catch (error) {
                 console.log(error);
             }
