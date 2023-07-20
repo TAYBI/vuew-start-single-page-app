@@ -1,12 +1,14 @@
 <template>
     <nav-bar :pages="pages" :active-page="activePage" :nav-link-click="(index) => activePage = index"></nav-bar>
-    <page-viewer :page="pages[activePage]"></page-viewer>
+    <page-viewer :clients="clients"></page-viewer>
 </template>
 
 <script>
 // import { onMounted } from 'vue';
 import navBar from './components/NavBar.vue';
 import pageViewer from './components/pageViewer.vue';
+
+
 
 export default {
     components: {
@@ -15,6 +17,7 @@ export default {
     },
     data() {
         return {
+            clients: [],
             activePage: 0,
             pages: [
                 {
@@ -35,15 +38,15 @@ export default {
             ]
         }
     },
-    mounted() {
-        // this.getClients();
+    created() {
+        this.getClients();
         console.log();
     },
     methods: {
         async getClients() {
             try {
-                const response = await fetch("");
-                const clients = await response.json();
+                const response = await fetch("http://178.238.238.52:8083/api/clients/omag_71_Dev commercial");
+                this.clients = await response.json();
                 console.log(clients);
             } catch (error) {
                 console.log(error);
@@ -52,3 +55,9 @@ export default {
     }
 }
 </script>
+
+
+"IDville": 0,
+"code_client": "000003",
+"nom": "mr EL test",
+"tel": "25545454",
