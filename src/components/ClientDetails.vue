@@ -2,7 +2,6 @@
     <p>{{ $route.params.id }}</p>
     <div class="container m-5">
         <form>
-            <!-- Nom -->
             <div class="form-group row mb-3">
                 <label for="inputNom" class="col-sm-2 col-form-label">Nom</label>
                 <div class="col-sm-10">
@@ -10,7 +9,6 @@
                 </div>
             </div>
 
-            <!-- Telephone -->
             <div class="form-group row mb-3">
                 <label for="inputTelephone" class="col-sm-2 col-form-label">Telephone</label>
                 <div class="col-sm-10">
@@ -18,7 +16,6 @@
                 </div>
             </div>
 
-            <!-- IDville -->
             <div class="form-group row mb-3">
                 <label for="inputIDville" class="col-sm-2 col-form-label">IDville</label>
                 <div class="col-sm-10">
@@ -26,7 +23,6 @@
                 </div>
             </div>
 
-            <!-- Adresse -->
             <div class="form-group row mb-3">
                 <label for="inputAdresse" class="col-sm-2 col-form-label">Adress</label>
                 <div class="col-sm-10">
@@ -43,7 +39,7 @@
 </template>
 
 <script>
-import router from '@/routes';
+// import { router } from '../routes';
 import { lienAPIRoot, ApiDB } from '../utils/globals';
 
 
@@ -103,7 +99,10 @@ export default {
             const url = `${lienAPIRoot}/clients/${ApiDB}/${this.$route.params.id}`
 
             try {
-                await fetch(url, { method: 'DELETE' }).then(() => router.push('/clients'));
+                await fetch(url, { method: 'DELETE' })
+                    .then(() => {
+                        window.history.back();
+                    })
             } catch (error) {
                 console.log(error);
             }
