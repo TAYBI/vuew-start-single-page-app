@@ -1,5 +1,4 @@
 <template>
-    <p>{{ $route.params.id }}</p>
     <div class="container m-5">
         <form>
             <div class="form-group row mb-3">
@@ -19,7 +18,7 @@
             <div class="form-group row mb-3">
                 <label for="inputIDville" class="col-sm-2 col-form-label">IDville</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputIDville" v-model="IDville" placeholder="IDville">
+                    <input type="number" class="form-control" id="inputIDville" v-model="IDville" placeholder="IDville">
                 </div>
             </div>
 
@@ -39,7 +38,6 @@
 </template>
 
 <script>
-// import { router } from '../routes';
 import { lienAPIRoot, ApiDB } from '../utils/globals';
 
 
@@ -59,8 +57,17 @@ export default {
         }
     },
     created() {
-        this.getClient();
-        console.log();
+        if (this.$route.params.id != 'ajouter') {
+            this.getClient();
+        }
+    },
+    mounted() {
+        if (this.$route.params.id == 'ajouter') {
+            const inputNomElement = document.getElementById("inputNom");
+            if (inputNomElement) {
+                inputNomElement.focus();
+            }
+        }
     },
     methods: {
         async getClient() {
@@ -75,38 +82,54 @@ export default {
                 this.Adresse = client.adresse
 
             } catch (error) {
-                console.log(error);
+
             }
         },
-        addClient() {
+
+
+        async addClient() {
             if (!this.Nom || !this.Telephone) {
                 alert('please fill nom and telephone !');
             }
 
-            this.pageCreated({
-                Nom: this.Nom,
-                Telephone: this.Telephone,
-                IDville: this.IDville,
-                Adresse: this.Adresse,
-            })
-
-            Nom = '';
-            Telephone = '';
-            IDville = '';
-            Adresse = '';
-        },
-        async deleteClient() {
-            const url = `${lienAPIRoot}/clients/${ApiDB}/${this.$route.params.id}`
+            const url = `${lienAPIRoot}/clients/${ApiDB}`;
+            const client = {
+                code_client: Date.now(),
+                nom: this.Nom,
+                tel: this.Telephone,
+                IdVille: this.IDville,
+                adresse: this.Adresse
+            };
 
             try {
-                await fetch(url, { method: 'DELETE' })
-                    .then(() => {
-                        window.history.back();
-                    })
+                await fetch(url, {
+                    method: 'POST', headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(client)
+                }).then(() => {
+                    alert('Ajoute avec succès');
+                    window.location.reload();
+                });
             } catch (error) {
                 console.log(error);
             }
         },
+
+
+        async deleteClient() {
+            const url = `${lienAPIRoot}/clients/${ApiDB}/${this.$route.params.id}`
+
+            try {
+                await fetch(url, { method: 'DELETE' }).then(() => {
+                    window.history.back();
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+
         async editeClient() {
             const url = `${lienAPIRoot}/clients/${ApiDB}/${this.$route.params.id}`
 
@@ -122,11 +145,10 @@ export default {
                         IdVille: this.IDville,
                         adresse: this.Adresse
                     })
-                })
-                    .then(() => {
-                        alert('Modifier acev succe');
-                        window.location.reload();
-                    })
+                }).then(() => {
+                    alert('Modifier avec succès');
+                    window.location.reload();
+                });
             } catch (error) {
                 console.log(error);
             }

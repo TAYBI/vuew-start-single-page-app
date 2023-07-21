@@ -1,4 +1,5 @@
 <template>
+    <a class="btn btn-primary m-3" href="#/clients/ajouter" role="button">Ajouter</a>
     <div class="p-3">
         <div class="input-group mb-5">
             <input v-model="querySearch" type="text" class="form-control" placeholder="Nom du client"
@@ -26,7 +27,7 @@
                     <td>{{ client.adresse }}</td>
                     <td class="col">
                         <div class="d-flex flex-row h-100">
-                            <button class="btn btn-success" @click="editItem(client.code_client)">Edit</button>
+                            <a class="btn btn-success" :href="`#/clients/${client.code_client}`" role="button">Edit</a>
                             <pre> </pre>
                             <button class="btn btn-danger" @click="deleteItem(client.code_client)">Delete</button>
                         </div>
