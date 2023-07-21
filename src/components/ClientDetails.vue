@@ -34,13 +34,16 @@
                 </div>
             </div>
 
-            <button :disabled="IsFormInvalid" type="submit" class="btn btn-primary"
-                @click.prevent="addClient">Submit</button>
+            <button :disabled="IsFormInvalid" type="submit" class="btn btn-primary m-1"
+                @click.prevent="addClient()">Submit</button>
+            <button type="submit" class="btn btn-danger m-1" @click.prevent="deleteClient()">Supprimer</button>
+            <button type="submit" class="btn btn-success m-1" @click.prevent="addClient()">Modifier</button>
         </form>
     </div>
 </template>
 
 <script>
+import router from '@/routes';
 import { lienAPIRoot, ApiDB } from '../utils/globals';
 
 
@@ -95,7 +98,16 @@ export default {
             Telephone = '';
             IDville = '';
             Adresse = '';
-        }
+        },
+        async deleteClient() {
+            const url = `${lienAPIRoot}/clients/${ApiDB}/${this.$route.params.id}`
+
+            try {
+                await fetch(url, { method: 'DELETE' }).then(() => router.push('/clients'));
+            } catch (error) {
+                console.log(error);
+            }
+        },
     }
 }
 </script>
