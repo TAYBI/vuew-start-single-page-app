@@ -35,9 +35,9 @@
             </div>
 
             <button :disabled="IsFormInvalid" type="submit" class="btn btn-primary m-1"
-                @click.prevent="addClient">Submit</button>
-            <button type="submit" class="btn btn-danger m-1" @click.prevent="deleteClient">Supprimer</button>
-            <button type="submit" class="btn btn-success m-1" @click.prevent="addClient">Modifier</button>
+                @click.prevent="addClient()">Submit</button>
+            <button type="submit" class="btn btn-danger m-1" @click.prevent="deleteClient()">Supprimer</button>
+            <button type="submit" class="btn btn-success m-1" @click.prevent="addClient()">Modifier</button>
         </form>
     </div>
 </template>
