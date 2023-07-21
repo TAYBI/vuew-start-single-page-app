@@ -49,6 +49,7 @@ export default {
     },
     methods: {
         async getClients() {
+            console.log(lienAPI);
             try {
                 const response = await fetch(lienAPI);
                 this.clients = await response.json();
