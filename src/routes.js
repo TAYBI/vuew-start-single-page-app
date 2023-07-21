@@ -1,15 +1,15 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import pageViewerVue from './components/pageViewer.vue';
-import CreatePageVue from './components/CreatePage.vue';
+import ClientsList from './components/ClientsList.vue';
+import ClientDetails from './components/ClientDetails.vue';
 import NavBarVue from './components/NavBar.vue';
 
 
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [
-        // { path: '/', component: NavBarVue },
-        { path: '/clients', component: pageViewerVue },
-        { path: '/clients/:id', component: CreatePageVue }
+        { path: '/', component: ClientsList },
+        // { path: '/clients', component: pageViewerVue },
+        { path: '/clients/:id', component: ClientDetails }
     ]
 })
 
