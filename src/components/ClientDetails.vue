@@ -1,4 +1,5 @@
 <template>
+    <p>{{ $route.params.id }}</p>
     <div class="container m-5">
         <form>
             <!-- Nom -->
@@ -40,6 +41,9 @@
 </template>
 
 <script>
+import { lienAPIRoot, ApiDB } from '../utils/globals';
+
+
 export default {
     props: ['pageCreated'],
     computed: {
@@ -55,7 +59,26 @@ export default {
             Adresse: '',
         }
     },
+    created() {
+        this.getClient();
+        console.log();
+    },
     methods: {
+        async getClient() {
+            const url = `${lienAPIRoot}/clients/${ApiDB}/${this.$route.params.id}`
+            try {
+                const response = await fetch(url);
+                const client = await response.json();
+
+                this.Nom = client.nom
+                this.Telephone = client.tel
+                this.IDville = client.IDville
+                this.Adresse = client.adresse
+
+            } catch (error) {
+                console.log(error);
+            }
+        },
         addClient() {
             if (!this.Nom || !this.Telephone) {
                 alert('please fill nom and telephone !');
