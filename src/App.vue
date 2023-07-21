@@ -63,9 +63,3 @@ export default {
     }
 }
 </script>
-
-
-"IDville": 0,
-"code_client": "000003",
-"nom": "mr EL test",
-"tel": "25545454",

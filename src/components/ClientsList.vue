@@ -21,7 +21,7 @@
             </thead>
             <tbody>
                 <tr v-for="(client, index) in clients" :key="index">
-                    <td>{{ client.nom }}</td>
+                    <td> <a :href="`#/clients/${client.code_client}`"> {{ client.nom }}</a></td>
                     <td>{{ client.tel }}</td>
                     <td>{{ client.IDville }}</td>
                     <td>{{ client.adresse }}</td>
