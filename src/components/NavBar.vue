@@ -48,7 +48,7 @@ export default {
             let useDarkMode = localStorage.getItem('useDarkMode');
 
             if (useDarkMode) {
-                this.useDarkMode = !useDarkMode;
+                this.useDarkMode = useDarkMode;
             }
         }
     }

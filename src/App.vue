@@ -1,8 +1,10 @@
 <template>
     <nav-bar :pages="pages" :active-page="activePage" :nav-link-click="(index) => activePage = index"></nav-bar>
+
+    <router-view></router-view>
     <!-- <page-viewer v-if="clients.length > 0" :clients="clients"></page-viewer> -->
-    <create-page :page-created="pageCreated">
-    </create-page>
+    <!-- <create-page :page-created="pageCreated">
+    </create-page> -->
 </template>
 
 <script>
