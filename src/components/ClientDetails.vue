@@ -123,7 +123,7 @@ export default {
             try {
                 await fetch(url, { method: 'DELETE' }).then(() => {
                     window.history.back();
-                })
+                });
             } catch (error) {
                 console.log(error);
             }

@@ -1,6 +1,6 @@
-<template>
+<template >
     <a class="btn btn-primary m-3" href="#/clients/ajouter" role="button">Ajouter</a>
-    <div class="p-3">
+    <div class="p-3" v-if="clients.length > 0">
         <div class="input-group mb-5">
             <input v-model="querySearch" type="text" class="form-control" placeholder="Nom du client"
                 aria-describedby="basic-addon2">
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { lienAPIRoot, ApiDB } from '../utils/globals';
+import { lienAPI, lienAPIRoot, ApiDB } from '../utils/globals';
 
 export default {
     props: ['clients'],
@@ -53,10 +53,25 @@ export default {
     },
     data() {
         return {
+            clients: [],
             querySearch: ''
         }
     },
+    created() {
+        this.getClients();
+        console.log();
+    },
     methods: {
+        async getClients() {
+            console.log(lienAPI);
+            try {
+                const response = await fetch(lienAPI);
+                this.clients = await response.json();
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
         async deleteItem(code) {
             const url = `${lienAPIRoot}/clients/${ApiDB}/${code}`
 

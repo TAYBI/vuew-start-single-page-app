@@ -1,6 +1,6 @@
 <template>
     <nav-bar :pages="pages" :active-page="activePage" :nav-link-click="(index) => activePage = index"></nav-bar>
-    <router-view v-if="clients.length > 0" :clients="clients" :page-created="pageCreated">
+    <router-view :page-created="pageCreated">
     </router-view>
     <!-- <clients-list v-if="clients.length > 0" :clients="clients"></clients-list> -->
     <!-- <client-details :page-created="pageCreated"></client-details> -->
@@ -11,7 +11,6 @@
 import navBar from './components/NavBar.vue';
 import ClientDetails from './components/ClientDetails.vue';
 import ClientsList from './components/ClientsList.vue';
-import { lienAPI } from './utils/globals';
 
 
 export default {
@@ -22,7 +21,6 @@ export default {
     },
     data() {
         return {
-            clients: [],
             activePage: 0,
             pages: [
                 {
@@ -43,20 +41,7 @@ export default {
             ]
         }
     },
-    created() {
-        this.getClients();
-        console.log();
-    },
     methods: {
-        async getClients() {
-            console.log(lienAPI);
-            try {
-                const response = await fetch(lienAPI);
-                this.clients = await response.json();
-            } catch (error) {
-                console.log(error);
-            }
-        },
         pageCreated(pageObj) {
             console.log(pageObj);
         }
