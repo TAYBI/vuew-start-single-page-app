@@ -2,7 +2,6 @@
     <nav-bar :pages="pages" :active-page="activePage" :nav-link-click="(index) => activePage = index"></nav-bar>
     <!-- <page-viewer v-if="clients.length > 0" :clients="clients"></page-viewer> -->
     <create-page :page-created="pageCreated">
-
     </create-page>
 </template>
 
@@ -11,6 +10,7 @@
 import createPage from './components/CreatePage.vue';
 import navBar from './components/NavBar.vue';
 import pageViewer from './components/pageViewer.vue';
+import { lienAPI } from './utils/globals';
 
 
 export default {
@@ -49,8 +49,9 @@ export default {
     methods: {
         async getClients() {
             try {
-                const response = await fetch("http://178.238.238.52:8083/api/clients/omag_71_Dev commercial");
+                const response = await fetch(lienAPI);
                 this.clients = await response.json();
+                console.log(lienAPI);
                 console.log(this.clients);
             } catch (error) {
                 console.log(error);

@@ -27,13 +27,14 @@
 
             <!-- Adresse -->
             <div class="form-group row mb-3">
-                <label for="inputAdresse" class="col-sm-2 col-form-label"></label>
+                <label for="inputAdresse" class="col-sm-2 col-form-label">Adress</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="inputAdresse" v-model="Adresse" placeholder="Adresse">
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" @click.prevent="addClient">Submit</button>
+            <button :disabled="IsFormInvalid" type="submit" class="btn btn-primary"
+                @click.prevent="addClient">Submit</button>
         </form>
     </div>
 </template>
@@ -41,6 +42,11 @@
 <script>
 export default {
     props: ['pageCreated'],
+    computed: {
+        IsFormInvalid() {
+            return (!this.Nom || !this.Telephone);
+        }
+    },
     data() {
         return {
             Nom: '',
@@ -51,7 +57,21 @@ export default {
     },
     methods: {
         addClient() {
+            if (!this.Nom || !this.Telephone) {
+                alert('please fill nom and telephone !');
+            }
 
+            this.pageCreated({
+                Nom: this.Nom,
+                Telephone: this.Telephone,
+                IDville: this.IDville,
+                Adresse: this.Adresse,
+            })
+
+            Nom = '';
+            Telephone = '';
+            IDville = '';
+            Adresse = '';
         }
     }
 }
